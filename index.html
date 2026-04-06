@@ -176,7 +176,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
     <input class="field-input" type="email" id="f-email" placeholder="you@company.com" autocomplete="email">
     <div class="field-error" id="err-email">Please enter a valid email</div>
   </div>
-  <button class="start-btn" onclick="startGame()">Open inbox &rarr;</button>
+  <button class="start-btn" id="start-btn-main">Open inbox &rarr;</button>
 </div>
 
 <!-- GAME -->
@@ -249,6 +249,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 </div>
 
 <script>
+document.getElementById('start-btn-main').addEventListener('click', startGame);
 const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
 const messages = [
