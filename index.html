@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docebo — Content Ops Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#fafaf9;--bg2:#f4f3f0;--bg3:#eceae5;
+  --text:#181816;--text2:#6a6860;--text3:#a8a69f;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --blue:#0057FF;--green:#16a34a;--red:#dc2626;--amber:#d97706;
+  --green-bg:#f0fdf4;--green-text:#15803d;--green-border:#bbf7d0;
+  --red-bg:#fef2f2;--red-text:#b91c1c;--red-border:#fecaca;
+  --blue-bg:#eff6ff;--blue-text:#1d4ed8;--blue-border:#bfdbfe;
+  --purple-bg:#faf5ff;--purple-text:#7e22ce;
+  --pink-bg:#fdf4ff;--pink-text:#a21caf;
+  --beige-bg:#fefce8;--beige-text:#854d0e;
+}
+html{font-size:16px;}
+body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;}
+#app{max-width:680px;margin:0 auto;padding:2.5rem 1.5rem;position:relative;}
+.screen{display:none;}.screen.active{display:block;}
+
+/* ── INTRO ── */
+.intro-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:2rem;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.live-text{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);font-weight:500;}
+.intro-title{font-family:'Instrument Serif',serif;font-size:2.6rem;line-height:1.08;margin-bottom:1rem;color:var(--text);letter-spacing:-.01em;}
+.intro-title em{font-style:italic;color:var(--blue);}
+.intro-body{font-size:.9375rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem;max-width:520px;}
+.intro-meta{display:flex;gap:2rem;margin:1.5rem 0 2rem;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.meta-item{font-size:.8125rem;color:var(--text2);}
+.meta-item strong{color:var(--text);font-weight:500;}
+.field-wrap{margin-bottom:1rem;}
+.field-label{display:block;font-size:.75rem;font-family:'Geist Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;font-weight:500;}
+.field-input{width:100%;max-width:380px;padding:10px 14px;border:1px solid var(--border2);background:#fff;font-family:'Geist',sans-serif;font-size:.9375rem;color:var(--text);outline:none;border-radius:6px;transition:border-color .15s;}
+.field-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,87,255,.08);}
+.field-error{font-size:.8125rem;color:var(--red);margin-top:.3rem;display:none;}
+.field-error.show{display:block;}
+.start-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;padding:11px 24px;font-family:'Geist',sans-serif;font-weight:600;font-size:.9375rem;cursor:pointer;border-radius:6px;margin-top:1rem;transition:background .15s,transform .1s;}
+.start-btn:hover{background:#0047e0;}
+.start-btn:active{transform:scale(.98);}
+
+/* ── GAME HEADER ── */
+.game-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:1px solid var(--border);}
+.gh-left{display:flex;align-items:center;gap:.875rem;}
+.gh-live{display:flex;align-items:center;gap:6px;}
+.gh-live-text{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.gh-name{font-size:.875rem;color:var(--text2);}
+.gh-name strong{color:var(--text);font-weight:500;}
+.progress-lbl{font-family:'Geist Mono',monospace;font-size:.75rem;color:var(--text3);}
+
+/* ── INBOX ── */
+.inbox-shell{border:1px solid var(--border2);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;background:#fff;}
+.inbox-topbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;border-bottom:1px solid var(--border);background:var(--bg2);}
+.inbox-topbar-left{display:flex;align-items:center;gap:.5rem;}
+.inbox-topbar strong{font-size:.9375rem;font-weight:600;color:var(--text);}
+.unread-pill{background:var(--blue);color:#fff;font-size:.6875rem;padding:2px 7px;border-radius:20px;font-weight:600;font-family:'Geist Mono',monospace;}
+.inbox-topbar-right{font-family:'Geist Mono',monospace;font-size:.75rem;color:var(--text3);}
+
+.inbox-explainer{padding:.875rem 1rem;background:var(--blue-bg);border-bottom:1px solid var(--blue-border);}
+.inbox-explainer p{font-size:.8125rem;color:var(--blue-text);line-height:1.6;}
+.inbox-explainer strong{font-weight:600;}
+
+.inbox-list{padding:.375rem;}
+.inbox-item{display:flex;align-items:flex-start;gap:.75rem;padding:.625rem .75rem;cursor:pointer;border-radius:6px;margin-bottom:2px;transition:background .1s;border:1px solid transparent;}
+.inbox-item.unread{background:#fff;border-color:var(--border);}
+.inbox-item.active{background:var(--blue-bg);border-color:var(--blue-border);}
+.inbox-item.done{opacity:.45;cursor:default;}
+.inbox-item.timed-out{opacity:.35;cursor:default;}
+.inbox-item:hover:not(.done):not(.timed-out):not(.active){background:var(--bg2);}
+.avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6875rem;font-weight:600;flex-shrink:0;margin-top:1px;font-family:'Geist Mono',monospace;}
+.av-red{background:#fee2e2;color:#991b1b;}
+.av-blue{background:#dbeafe;color:#1e40af;}
+.av-purple{background:#ede9fe;color:#5b21b6;}
+.av-green{background:#dcfce7;color:#166534;}
+.av-pink{background:#fce7f3;color:#9d174d;}
+.item-body{flex:1;min-width:0;}
+.item-top{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;margin-bottom:2px;}
+.item-sender{font-size:.875rem;font-weight:500;color:var(--text);}
+.item-time{font-family:'Geist Mono',monospace;font-size:.6875rem;color:var(--text3);white-space:nowrap;}
+.item-subject{font-size:.8125rem;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400;}
+.item-preview{font-size:.75rem;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:10px;}
+.dot-unread{background:var(--blue);}
+.dot-done{background:var(--green);}
+.dot-timeout{background:var(--text3);}
+.dot-empty{background:transparent;}
+
+/* ── MESSAGE PANE ── */
+.empty-pane{border:1px solid var(--border);border-radius:10px;padding:3rem 1rem;text-align:center;color:var(--text3);font-size:.9375rem;margin-bottom:1.25rem;background:#fff;}
+.message-pane{border:1px solid var(--border2);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;background:#fff;}
+.msg-header{padding:.875rem 1rem;border-bottom:1px solid var(--border);background:var(--bg2);}
+.msg-subject{font-family:'Instrument Serif',serif;font-size:1.1875rem;line-height:1.25;margin-bottom:.3rem;color:var(--text);}
+.msg-from{font-size:.8125rem;color:var(--text2);}
+.msg-from strong{color:var(--text);font-weight:500;}
+.msg-body{padding:.875rem 1rem 1.125rem;font-size:.9375rem;line-height:1.75;color:var(--text2);border-bottom:1px solid var(--border);}
+
+.timer-row{display:flex;align-items:center;gap:.75rem;padding:.625rem 1rem;border-bottom:1px solid var(--border);background:var(--bg2);}
+.timer-label{font-family:'Geist Mono',monospace;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);font-weight:500;}
+.timer-track{flex:1;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.timer-fill{height:100%;border-radius:2px;transition:width .25s linear,background .5s;}
+.timer-num{font-family:'Geist Mono',monospace;font-size:.8125rem;font-weight:500;min-width:30px;text-align:right;color:var(--text);}
+.timer-num.urgent{color:var(--red);}
+
+.reply-area{padding:.875rem 1rem 1rem;}
+.reply-label{font-family:'Geist Mono',monospace;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;font-weight:500;}
+.reply-textarea{width:100%;min-height:96px;padding:10px 12px;border:1px solid var(--border2);background:var(--bg);font-family:'Geist',sans-serif;font-size:.9375rem;color:var(--text);outline:none;resize:vertical;line-height:1.65;border-radius:6px;transition:border-color .15s,background .15s;}
+.reply-textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(0,87,255,.07);}
+.reply-textarea:disabled{opacity:.45;cursor:not-allowed;}
+.reply-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.625rem;gap:.5rem;flex-wrap:wrap;}
+.char-hint{font-size:.8125rem;color:var(--text3);}
+.send-btn{display:inline-flex;align-items:center;gap:6px;background:var(--text);color:#fff;border:none;padding:9px 20px;font-family:'Geist',sans-serif;font-weight:600;font-size:.875rem;cursor:pointer;border-radius:6px;transition:background .15s,transform .1s;}
+.send-btn:hover{background:#0057FF;}
+.send-btn:active{transform:scale(.98);}
+.send-btn:disabled{background:var(--text3);cursor:not-allowed;}
+
+.sending-strip{display:none;padding:.5rem 1rem;font-size:.8125rem;color:var(--text2);background:var(--bg2);border-top:1px solid var(--border);align-items:center;gap:.5rem;}
+.sending-strip.show{display:flex;}
+.spinner{width:12px;height:12px;border:1.5px solid var(--border2);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.timeout-strip{display:none;padding:.625rem 1rem;font-size:.8125rem;color:var(--beige-text);background:var(--beige-bg);border-top:1px solid #fde68a;}
+.timeout-strip.show{display:block;}
+
+.next-btn{display:none;margin:.875rem 1rem .25rem;background:var(--text);color:#fff;border:none;padding:9px 20px;font-family:'Geist',sans-serif;font-weight:600;font-size:.875rem;cursor:pointer;border-radius:6px;transition:background .15s;}
+.next-btn.show{display:inline-block;}
+.next-btn:hover{background:var(--blue);}
+
+/* ── RESULT ── */
+.result-screen{padding-top:.5rem;}
+.r-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;}
+.r-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+.r-dot-label{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-text);font-weight:500;}
+.r-title{font-family:'Instrument Serif',serif;font-size:2.2rem;line-height:1.1;margin-bottom:.875rem;letter-spacing:-.01em;}
+.r-sub{font-size:.9375rem;color:var(--text2);line-height:1.75;margin-bottom:.5rem;max-width:480px;}
+.r-next{font-size:.875rem;color:var(--text2);margin-top:.875rem;padding-top:.875rem;border-top:1px solid var(--border);}
+.r-next strong{color:var(--text);font-weight:500;}
+.restart-btn{display:inline-block;background:transparent;border:1px solid var(--border2);padding:8px 20px;font-family:'Geist',sans-serif;font-size:.875rem;cursor:pointer;color:var(--text2);border-radius:6px;margin-top:1.5rem;transition:border-color .15s,color .15s;}
+.restart-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;font-family:'Geist',sans-serif;font-size:.8125rem;padding:8px 16px;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none;z-index:100;border-radius:6px;}
+.toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div id="app">
+<div class="toast" id="toast"></div>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="intro-eyebrow">
+    <div class="live-dot"></div>
+    <span class="live-text">Live — content ops</span>
+  </div>
+  <h1 class="intro-title">Your inbox is<br><em>on fire.</em></h1>
+  <p class="intro-body">Eight messages. Real situations. Type your actual response — what you'd send, say, or do. The clock starts the moment you open each one.</p>
+  <p class="intro-body">No multiple choice. No right answers printed on the back. Just show us how you think.</p>
+  <div class="intro-meta">
+    <div class="meta-item">Messages <strong>8</strong></div>
+    <div class="meta-item">Timer <strong>Varies</strong></div>
+    <div class="meta-item">Takes <strong>~8 min</strong></div>
+  </div>
+  <div class="field-wrap">
+    <label class="field-label" for="f-name">Your name</label>
+    <input class="field-input" type="text" id="f-name" placeholder="First and last name" autocomplete="name">
+    <div class="field-error" id="err-name">Please enter your name</div>
+  </div>
+  <div class="field-wrap">
+    <label class="field-label" for="f-email">Email address</label>
+    <input class="field-input" type="email" id="f-email" placeholder="you@company.com" autocomplete="email">
+    <div class="field-error" id="err-email">Please enter a valid email</div>
+  </div>
+  <button class="start-btn" onclick="startGame()">Open inbox &rarr;</button>
+</div>
+
+<!-- GAME -->
+<div id="screen-game" class="screen">
+  <div class="game-header">
+    <div class="gh-left">
+      <div class="gh-live">
+        <div class="live-dot"></div>
+        <span class="gh-live-text">Live</span>
+      </div>
+      <div class="gh-name">Inbox &mdash; <strong id="gh-name-display"></strong></div>
+    </div>
+    <div class="progress-lbl" id="progress-lbl">0 / 8</div>
+  </div>
+
+  <div class="inbox-shell">
+    <div class="inbox-topbar">
+      <div class="inbox-topbar-left">
+        <strong>Inbox</strong>
+        <span class="unread-pill" id="unread-count">8</span>
+      </div>
+      <span class="inbox-topbar-right">Today</span>
+    </div>
+    <div class="inbox-explainer">
+      <p><strong>How this works:</strong> Open each message and type your response — what you'd actually say or do. The timer starts when you open a message. Work through all eight at your own pace, in any order. Be direct; a few sentences is enough.</p>
+    </div>
+    <div class="inbox-list" id="inbox-list"></div>
+  </div>
+
+  <div id="empty-pane" class="empty-pane">Select a message to respond</div>
+  <div class="message-pane" id="message-pane" style="display:none;">
+    <div class="msg-header">
+      <div class="msg-subject" id="msg-subject"></div>
+      <div class="msg-from" id="msg-from"></div>
+    </div>
+    <div class="msg-body" id="msg-body"></div>
+    <div class="timer-row">
+      <span class="timer-label">Time to respond</span>
+      <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+      <span class="timer-num" id="timer-num">—</span>
+    </div>
+    <div class="reply-area">
+      <div class="reply-label">Your reply</div>
+      <textarea class="reply-textarea" id="reply-textarea" placeholder="Type your response..."></textarea>
+      <div class="reply-footer">
+        <span class="char-hint" id="char-hint">Be direct. A few sentences is enough.</span>
+        <button class="send-btn" id="send-btn" onclick="sendReply()">Send &rarr;</button>
+      </div>
+    </div>
+    <div class="sending-strip" id="sending-strip">
+      <div class="spinner"></div>
+      <span>Sending...</span>
+    </div>
+    <div class="timeout-strip" id="timeout-strip">Time's up — moving on.</div>
+    <button class="next-btn" id="next-btn" onclick="nextMessage()">Next message &rarr;</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result" class="screen result-screen">
+  <div class="r-eyebrow">
+    <div class="r-dot"></div>
+    <span class="r-dot-label">Inbox cleared</span>
+  </div>
+  <h1 class="r-title">That's a wrap,<br><em><span id="r-first-name"></span>.</em></h1>
+  <p class="r-sub">All eight messages handled. We'll review your responses and be in touch about next steps.</p>
+  <p class="r-next">Questions in the meantime? Reach out to <strong>joe@docebo.com</strong></p>
+  <button class="restart-btn" onclick="restart()">Start over</button>
+</div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+const messages = [
+  {
+    id:0,sender:"Kyle Lacy",role:"CMO",av:"KL",avClass:"av-blue",
+    time:"8:47am",timer:90,
+    subject:"Quick question before QBR — content north star",
+    preview:"What's the one number we track?",
+    rubric:"Strong answer: proposes third-party amplification, earned citation, analyst or influencer reference — unprompted. Explicitly rejects pipeline attribution or vanity metrics. Shows understanding of why attribution is broken in B2B content. Weak: leads with downloads, traffic, or MQLs without qualification.",
+    body:"Hey — heading into QBR prep. I want to table the attribution debate for good. Give me one metric that proves content is working. Something nobody can argue with. Pipeline attribution is off the table — too much noise. What are we tracking?"
+  },
+  {
+    id:1,sender:"Alessio Artuffo",role:"CEO",av:"AA",avClass:"av-red",
+    time:"9:03am",timer:90,
+    subject:"Content system — where are we",
+    preview:"What's the first thing you're actually building",
+    rubric:"Strong answer: describes something concrete — a workflow map, a working prototype, a specific tool or prompt system. Not a strategy deck or a plan. Something that exists or is actively being built right now. Weak: describes a discovery process, stakeholder audit, tool evaluation, or anything that delays building in favour of planning.",
+    body:"Hey — wanted to check in on the AI content system. I know you've been given the mandate to build it. Walk me through it. Where did you start and what does the first version actually look like? Not the strategy deck — the thing you're building."
+  },
+  {
+    id:2,sender:"Slack: #content-ops",role:"Internal",av:"#",avClass:"av-purple",
+    time:"9:31am",timer:90,
+    subject:"AI draft is up — but something's off",
+    preview:"The CEO piece doesn't sound like him at all",
+    rubric:"Strong answer: goes straight to the prompt as the problem. Identifies missing voice constraints, example sentences, banned phrases, rhythm guidance. Treats it as an engineering problem to fix — not a reason to abandon AI. Mentions fixing this piece while improving the system. Weak: rewrites it manually and moves on, blames the AI, or asks for more time.",
+    body:"Dropped the AI draft for Alessio's thought leadership piece in the shared doc. Factually solid, well-structured. But it reads like a generic B2B blog post. Confident, no personality. Not him, not us. He wants to review it Wednesday EOD."
+  },
+  {
+    id:3,sender:"Kyle Lacy",role:"CMO",av:"KL",avClass:"av-blue",
+    time:"10:12am",timer:120,
+    subject:"Four vertical reports. Twelve months. Two people. Go.",
+    preview:"Leadership wants the AI readiness format for four industries",
+    rubric:"Strong answer: proposes building a repeatable system before starting the first report — a research-to-publish playbook that makes all four executions faster and more consistent. May also raise resourcing, but leads with the system. Weak: says they'll do Q1 and figure out the rest later, outsources to agencies, or leads with a headcount ask before proposing a solution.",
+    body:"Leadership signed off on four vertical versions of the AI Readiness Report — government, life sciences, financial services, retail. Each needs original research, a report, a campaign, and a webinar. One per quarter. Your team is you and a senior writer for now. New hires aren't confirmed. How do you approach this?"
+  }
+]
+  {
+    id:4,sender:"Priya Nair",role:"Demand Gen",av:"PN",avClass:"av-green",
+    time:"10:44am",timer:75,
+    subject:"Content ask — CLO campaign, 3 weeks",
+    preview:"Need a whitepaper for the paid push",
+    rubric:"Strong answer: challenges the format before accepting the brief. Proposes something more specific — original data, a diagnostic tool, a benchmark. Shows awareness that CLOs don't convert on generic whitepapers. Weak: accepts the whitepaper brief and scopes it, asks for more time, or produces something lighter without a strategic rationale.",
+    body:"Hi — launching a paid campaign targeting CLOs at enterprise companies next month. Need a content offer strong enough to drive form fills. We're thinking a whitepaper on AI readiness. Can you scope this for a 3-week turnaround? Team is you and one writer right now."
+  },
+  {
+    id:5,sender:"Slack: #general",role:"Internal",av:"#",avClass:"av-purple",
+    time:"11:20am",timer:60,
+    subject:"Demand gen wants access to the AI system",
+    preview:"Can we use it for email copy and landing pages?",
+    rubric:"Strong answer: says yes immediately. Offers a walkthrough. Invites feedback to improve the system. No gatekeeping, no permission-seeking. Weak: checks with manager first, calls it beta, scopes a custom version before sharing anything, or stalls.",
+    body:"Hey — heard you built an AI content workflow for the content team. Any chance demand gen can use it directly? We want to spin up email copy and landing page variants without going through content review each time. No formal request, just checking."
+  },
+  {
+    id:6,sender:"Owen (prev. team)",role:"Handover",av:"OW",avClass:"av-pink",
+    time:"1:15pm",timer:105,
+    subject:"FYI — you're going to get a lot of ad hoc copy requests",
+    preview:"Sales, CS, and product all pinging the content team",
+    rubric:"Strong answer: proposes building something — an AI-powered intake tool, a self-serve prompt, an automated routing system — before the problem lands on them. Doesn't wait to be asked. Weak: documents the problem, sets up a triage process, emails the requesters, assigns someone to manage the queue. Any answer that adds process rather than removes the problem.",
+    body:"Heads up — Sales, CS, and Product have been sending one-off copy requests directly to the content team for months. Bio updates, email edits, paragraph rewrites. Nobody set up a process. It's eating maybe a third of the team's week. Flagging so you know before it lands on you."
+  },
+  {
+    id:7,sender:"Slack: #research",role:"Internal",av:"#",avClass:"av-purple",
+    time:"2:40pm",timer:90,
+    subject:"AI Readiness Report is getting cited everywhere",
+    preview:"Reddit, CLO LinkedIn, Substack with 12k subscribers",
+    rubric:"Strong answer: treats it as a distribution signal worth cultivating. Plans to engage in threads, reach out to the Substack author, map these communities for future use. Connects it to a broader earned media or third-party amplification strategy. Weak: logs it, screenshots it for the next meeting and moves on, hands it to the PR agency, or calls it unrepeatable.",
+    body:"The AI Readiness Report is being referenced in a Reddit thread for L&D professionals, a CLO's LinkedIn post, and a Substack newsletter with 12k subscribers. None of it was placed by the PR team. Totally organic. Thought you'd want to know."
+  },];
+
+let candidateName='',candidateEmail='';
+let activeId=null,timerInterval=null,timeLeft=0,totalTime=0;
+let answered=new Set(),results=[];
+
+function startGame(){
+  const name=document.getElementById('f-name').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  let valid=true;
+  if(!name){document.getElementById('err-name').classList.add('show');valid=false;}
+  else document.getElementById('err-name').classList.remove('show');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){document.getElementById('err-email').classList.add('show');valid=false;}
+  else document.getElementById('err-email').classList.remove('show');
+  if(!valid)return;
+  candidateName=name;candidateEmail=email;
+  document.getElementById('gh-name-display').textContent=name.split(' ')[0];
+  showScreen('screen-game');
+  renderInbox();
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function renderInbox(){
+  const list=document.getElementById('inbox-list');
+  list.innerHTML='';
+  messages.forEach(m=>{
+    const res=results.find(r=>r.id===m.id);
+    const isActive=activeId===m.id;
+    let cls='inbox-item';
+    if(res)cls+=' done';
+    else if(isActive)cls+=' active';
+    else cls+=' unread';
+    const item=document.createElement('div');
+    item.className=cls;
+    if(!res)item.onclick=()=>openMessage(m.id);
+    let dotCls='item-dot ';
+    if(res&&!res.timedOut)dotCls+='dot-done';
+    else if(res&&res.timedOut)dotCls+='dot-timeout';
+    else if(!res&&!isActive)dotCls+='dot-unread';
+    else dotCls+='dot-empty';
+    item.innerHTML=`<div class="avatar ${m.avClass}">${m.av}</div><div class="item-body"><div class="item-top"><span class="item-sender">${m.sender}</span><span class="item-time">${m.time}</span></div><div class="item-subject">${m.subject}</div><div class="item-preview">${m.preview}</div></div><div class="${dotCls}"></div>`;
+    list.appendChild(item);
+  });
+  const done=results.length;
+  document.getElementById('unread-count').textContent=Math.max(0,messages.length-done);
+  document.getElementById('progress-lbl').textContent=done+' / '+messages.length;
+}
+
+function openMessage(id){
+  if(answered.has(id)||activeId===id)return;
+  if(timerInterval)clearInterval(timerInterval);
+  activeId=id;
+  const m=messages.find(x=>x.id===id);
+  document.getElementById('empty-pane').style.display='none';
+  const pane=document.getElementById('message-pane');
+  pane.style.display='block';
+  document.getElementById('msg-subject').textContent=m.subject;
+  document.getElementById('msg-from').innerHTML='<strong>'+m.sender+'</strong> &nbsp;&middot;&nbsp; '+m.role;
+  document.getElementById('msg-body').textContent=m.body;
+  const ta=document.getElementById('reply-textarea');
+  ta.value='';ta.disabled=false;
+  document.getElementById('send-btn').disabled=false;
+  document.getElementById('sending-strip').className='sending-strip';
+  document.getElementById('timeout-strip').className='timeout-strip';
+  document.getElementById('next-btn').className='next-btn';
+  renderInbox();
+  startTimer(m.timer,id);
+}
+
+function startTimer(secs,id){
+  totalTime=secs;timeLeft=secs;
+  updateTimer(secs,secs);
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    updateTimer(timeLeft,totalTime);
+    if(timeLeft<=0){clearInterval(timerInterval);handleTimeout(id);}
+  },1000);
+}
+
+function updateTimer(left,total){
+  const pct=Math.max(0,(left/total)*100);
+  const fill=document.getElementById('timer-fill');
+  const num=document.getElementById('timer-num');
+  if(!fill)return;
+  fill.style.width=pct+'%';
+  fill.style.background=pct>50?'#0057FF':pct>25?'#d97706':'#dc2626';
+  num.textContent=left+'s';
+  num.className='timer-num'+(left<=10?' urgent':'');
+}
+
+function handleTimeout(id){
+  if(answered.has(id))return;
+  answered.add(id);
+  const m=messages.find(x=>x.id===id);
+  const ta=document.getElementById('reply-textarea');
+  const responseText=ta.value.trim();
+  ta.disabled=true;
+  document.getElementById('send-btn').disabled=true;
+  document.getElementById('timeout-strip').className='timeout-strip show';
+  document.getElementById('next-btn').className='next-btn show';
+  const result={id,timedOut:true,response:responseText||'[no response]',subject:m.subject,rubric:m.rubric,timeUsed:m.timer,sender:m.sender};
+  results.push(result);
+  submitResult(result,m);
+  renderInbox();
+  showToast('Time\'s up — '+m.sender);
+  if(results.length===messages.length)setTimeout(finalise,1400);
+}
+
+function sendReply(){
+  if(timerInterval)clearInterval(timerInterval);
+  const ta=document.getElementById('reply-textarea');
+  const text=ta.value.trim();
+  if(!text){ta.focus();return;}
+  const id=activeId;
+  if(answered.has(id))return;
+  answered.add(id);
+  ta.disabled=true;
+  document.getElementById('send-btn').disabled=true;
+  document.getElementById('sending-strip').className='sending-strip show';
+  const m=messages.find(x=>x.id===id);
+  const timeUsed=totalTime-timeLeft;
+  const result={id,timedOut:false,response:text,subject:m.subject,rubric:m.rubric,timeUsed,sender:m.sender};
+  results.push(result);
+  submitResult(result,m);
+  setTimeout(()=>{
+    document.getElementById('sending-strip').className='sending-strip';
+    document.getElementById('next-btn').className='next-btn show';
+    renderInbox();
+    if(results.length===messages.length)setTimeout(finalise,1400);
+  },600);
+}
+
+function submitResult(result,m){
+  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
+    console.log('Result (no URL configured):', result);
+    return;
+  }
+  const payload={
+    candidate_name:candidateName,
+    candidate_email:candidateEmail,
+    message_id:result.id,
+    message_subject:result.subject,
+    sender:result.sender,
+    response:result.response,
+    timed_out:result.timedOut,
+    time_used_seconds:result.timeUsed,
+    timestamp:new Date().toISOString(),
+    rubric:m.rubric
+  };
+  fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(err=>console.error('Submit error:',err));
+}
+
+function nextMessage(){
+  const remaining=messages.filter(m=>!answered.has(m.id));
+  if(remaining.length===0){finalise();return;}
+  document.getElementById('empty-pane').style.display='block';
+  document.getElementById('message-pane').style.display='none';
+  activeId=null;
+  renderInbox();
+}
+
+function finalise(){
+  if(timerInterval)clearInterval(timerInterval);
+  document.getElementById('r-first-name').textContent=candidateName.split(' ')[0];
+  showScreen('screen-result');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show';
+  setTimeout(()=>t.className='toast',2200);
+}
+
+function restart(){
+  if(timerInterval)clearInterval(timerInterval);
+  activeId=null;answered=new Set();results=[];
+  candidateName='';candidateEmail='';
+  document.getElementById('f-name').value='';
+  document.getElementById('f-email').value='';
+  showScreen('screen-intro');
+}
+</script>
+</body>
+</html>
