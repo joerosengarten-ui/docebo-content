@@ -227,12 +227,12 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
   <div class="r-eyebrow"><div class="r-dot"></div><span class="r-dot-label">Inbox cleared</span></div>
   <h1 class="r-title">That is a wrap,<br><em><span id="r-first-name"></span>.</em></h1>
   <p class="r-sub">All seven messages handled. We will review your responses and be in touch about next steps.</p>
-  <p class="r-next">Questions in the meantime? Reach out to <strong>joe@docebo.com</strong></p>
+  <p class="r-next">Questions in the meantime? Reach out to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfdad0f5d1dad6d0d7da9bd6dad8">[email&#160;protected]</a></strong></p>
   <button class="restart-btn" onclick="restart()">Start over</button>
 </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyinrO2BeNYrIfI4ZCAE2INNDjQdhaTUVupHserPkR55sG1OuXO3p-vE2bu2MaV2WLnKQ/exec";
 
 var MSG = [
@@ -388,7 +388,7 @@ function sendReply(){
 }
 
 function submit(r){
-  if(!SCRIPT_URL||SCRIPT_URL==="https://script.google.com/macros/s/AKfycbyinrO2BeNYrIfI4ZCAE2INNDjQdhaTUVupHserPkR55sG1OuXO3p-vE2bu2MaV2WLnKQ/exec"){console.log("Result:",r);return;}
+  if(!SCRIPT_URL||SCRIPT_URL==="YOUR_APPS_SCRIPT_URL_HERE"){console.log("Result:",r);return;}
   var p={candidate_name:cname,candidate_email:cemail,message_id:r.id,message_type:r.type,message_subject:r.subject,sender:r.sender,response:r.response,timed_out:r.timedOut,time_used_seconds:r.timeUsed,timestamp:new Date().toISOString(),rubric:r.rubric};
   fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(e){console.error(e);});
 }
@@ -406,17 +406,4 @@ function nextMessage(){
 function finalise(){
   if(tiv)clearInterval(tiv);
   el("r-first-name").textContent=cname.split(" ")[0];
-  showScreen("screen-result");
-}
-
-function restart(){
-  if(tiv)clearInterval(tiv);
-  activeId=null;answered=[];results=[];
-  cname="";cemail="";
-  el("f-name").value="";
-  el("f-email").value="";
-  showScreen("screen-intro");
-}
-</script>
-</body>
-</html>
+  showScreen("screen-result")
