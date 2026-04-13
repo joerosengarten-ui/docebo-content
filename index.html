@@ -233,7 +233,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 </div>
 
 <script>
-var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbziXACG9iLeft9LF4ivDcC9kH2R7kT9v-xLWOobK9WyMkc7cYPFoXh6WjLWtSBXpVS22g/exec";
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyinrO2BeNYrIfI4ZCAE2INNDjQdhaTUVupHserPkR55sG1OuXO3p-vE2bu2MaV2WLnKQ/exec";
 
 var MSG = [
   {id:0,type:"decision",timer:150,sender:"Kyle Lacy",role:"CMO",av:"KL",avc:"av-blue",time:"8:47am",subj:"Quick question before QBR",prev:"What is the one number we track?",body:"Hey - heading into QBR prep. I want to table the attribution debate for good. Give me one metric that proves content is working. Something nobody can argue with. Pipeline attribution is off the table - too much noise. What are we tracking?",hint:"Be direct. A few sentences is enough.",rubric:"Strong: proposes third-party amplification, earned citation, analyst or influencer reference. Rejects pipeline attribution. Understands why attribution is broken. Weak: leads with downloads, traffic, MQLs."},
@@ -388,7 +388,7 @@ function sendReply(){
 }
 
 function submit(r){
-  if(!SCRIPT_URL||SCRIPT_URL==="https://script.google.com/macros/s/AKfycbziXACG9iLeft9LF4ivDcC9kH2R7kT9v-xLWOobK9WyMkc7cYPFoXh6WjLWtSBXpVS22g/exec"){console.log("Result:",r);return;}
+  if(!SCRIPT_URL||SCRIPT_URL==="https://script.google.com/macros/s/AKfycbyinrO2BeNYrIfI4ZCAE2INNDjQdhaTUVupHserPkR55sG1OuXO3p-vE2bu2MaV2WLnKQ/exec"){console.log("Result:",r);return;}
   var p={candidate_name:cname,candidate_email:cemail,message_id:r.id,message_type:r.type,message_subject:r.subject,sender:r.sender,response:r.response,timed_out:r.timedOut,time_used_seconds:r.timeUsed,timestamp:new Date().toISOString(),rubric:r.rubric};
   fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(e){console.error(e);});
 }
