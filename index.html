@@ -388,7 +388,7 @@ function sendReply(){
 }
 
 function submit(r){
-  if(!SCRIPT_URL||SCRIPT_URL==="YOUR_APPS_SCRIPT_URL_HERE"){console.log("Result:",r);return;}
+  if(!SCRIPT_URL||SCRIPT_URL==="https://script.google.com/macros/s/AKfycbziXACG9iLeft9LF4ivDcC9kH2R7kT9v-xLWOobK9WyMkc7cYPFoXh6WjLWtSBXpVS22g/exec"){console.log("Result:",r);return;}
   var p={candidate_name:cname,candidate_email:cemail,message_id:r.id,message_type:r.type,message_subject:r.subject,sender:r.sender,response:r.response,timed_out:r.timedOut,time_used_seconds:r.timeUsed,timestamp:new Date().toISOString(),rubric:r.rubric};
   fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(p)}).catch(function(e){console.error(e);});
 }
