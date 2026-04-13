@@ -236,12 +236,12 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
   <div class="r-eyebrow"><div class="r-dot"></div><span class="r-dot-label">Inbox cleared</span></div>
   <h1 class="r-title">That's a wrap,<br><em><span id="r-first-name"></span>.</em></h1>
   <p class="r-sub">All eight messages handled. We'll review your responses and be in touch about next steps.</p>
-  <p class="r-next">Questions in the meantime? Reach out to <strong>joe@docebo.com</strong></p>
+  <p class="r-next">Questions in the meantime? Reach out to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b21242e0b2f24282e292465282426">[email&#160;protected]</a></strong></p>
   <button class="restart-btn" onclick="restart()">Start over</button>
 </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
 var messages = [
@@ -252,7 +252,7 @@ var messages = [
   {id:4,type:"decision",sender:"Priya Nair",role:"Demand Gen",av:"PN",avClass:"av-green",time:"10:44am",timer:150,subject:"Content ask — CLO campaign, 3 weeks",preview:"Need a whitepaper for the paid push",rubric:"Strong: challenges the format. Proposes something more specific — original data, diagnostic, benchmark. CLOs don't convert on generic whitepapers. Weak: accepts whitepaper brief, asks for more time, produces lighter asset without rationale.",brief:null,body:"Hi — launching a paid campaign targeting CLOs at enterprise companies next month. Need a content offer strong enough to drive form fills. We're thinking a whitepaper on AI readiness. Can you scope this for a 3-week turnaround? Team is you and one writer right now.",hint:"Be direct. A few sentences is enough."},
   {id:5,type:"decision",sender:"Slack: #general",role:"Internal",av:"#",avClass:"av-purple",time:"11:20am",timer:150,subject:"Demand gen wants access to the AI system",preview:"Can we use it for email copy and landing pages?",rubric:"Strong: says yes immediately. Offers walkthrough. Invites feedback to improve system. No gatekeeping, no permission-seeking. Weak: checks with manager first, calls it beta, scopes custom version before sharing, stalls.",brief:null,body:"Hey — heard you built an AI content workflow for the content team. Any chance demand gen can use it directly? We want to spin up email copy and landing page variants without going through content review each time. No formal request, just checking.",hint:"Be direct. A few sentences is enough."},
   {id:6,type:"writing",sender:"Alessio Artuffo",role:"CEO",av:"AA",avClass:"av-red",time:"1:15pm",timer:900,subject:"Need a LinkedIn post — workforce readiness angle",preview:"Writing task — 15 minutes",rubric:"Strong: writes in a confident, first-person exec voice. Makes a specific, non-obvious argument. Doesn't just summarize facts — turns an idea into a point of view. Avoids generic B2B language, em dashes, buzzwords. Shows they can write with personality and conviction. Weak: generic commentary, listicle format, sounds like a press release, heavy AI-speak, no real POV.",brief:"Alessio has been thinking about why some companies are pulling ahead on AI adoption while others are stalling. His take: it's not about the technology stack — the real competitive moat is workforce readiness. The companies winning on AI aren't buying better tools. They're closing the skills gap faster. Write a LinkedIn post in Alessio's voice making this argument. It should feel like a CEO who has thought hard about this — not a marketing exec summarizing a report. Aim for 150–200 words.",body:"Hey — I need a LinkedIn post drafted today. I've been sitting on this idea for a while and want to get it out. Brief is below. Write it in my voice — direct, no fluff, something people will actually want to read.",hint:"Write the actual post. Aim for 150–200 words. First person, Alessio's voice."},
-  {id:7,type:"writing",sender:"Owen (prev. team)",role:"Handover",av:"OW",avClass:"av-pink",time:"2:40pm",timer:3600,subject:"Blog brief — AI Readiness Report data story",preview:"Writing task — 1 hour",rubric:"Strong: finds a narrative angle rather than just summarizing the data. Leads with a hook, not a stat. Uses the numbers to build an argument, not a listicle. Has a clear POV and conclusion. Writes in plain, direct language — no jargon, no AI-speak. Weak: opens with a stat, bullet-point structure, no real argument, reads like a press release, generic conclusions.",brief:"Use these four data points from Docebo's AI Readiness Gap Report to write a blog post that tells a story — not a summary. The data: 79% of learning leaders say they have the tools they need for AI. Only 9% have used those tools to actually transform how work gets done. 85% of learners say current training doesn't prepare them for AI in their role. 60% of learners say their learning program wasn't designed for them. The tension in the data is the story: everyone thinks they're ready, almost nobody is doing anything about it, and the people who actually have to learn are being left behind. Find the angle. Write the post. Aim for 400–500 words.",body:"Leaving you a blog brief from the AI Readiness Report data. This one's yours to run with — I've done the hard part pulling the numbers. The brief is below. Write the actual post, not an outline.",hint:"Write the full blog post. Aim for 400–500 words. Find the narrative — don't just list the stats."}
+  {id:7,type:"writing",sender:"Joe Rosengarten",role:"Director, Content",av:"JR",avClass:"av-blue",time:"2:40pm",timer:3600,subject:"Blog brief — AI Readiness Report",preview:"Writing task — 1 hour",rubric:"Strong: finds a narrative angle rather than just summarizing the data. Leads with a hook, not a stat. Uses the numbers to build an argument, not a listicle. Has a clear POV and conclusion. Writes in plain, direct language — no jargon, no AI-speak. Weak: opens with a stat, bullet-point structure, no real argument, reads like a press release, generic conclusions.",brief:null,body:"Here's a blog brief from the AI Readiness Report data. I've pulled some of the numbers and there's a bit of a brief below.\n\nThe data: 79% of learning leaders say they have the tools they need for AI. Only 9% have used those tools to actually transform how work gets done. 85% of learners say current training doesn't prepare them for AI in their role. 60% of learners say their learning program wasn't designed for them.\n\nThe tension in the data is the story: everyone thinks they're ready, almost nobody is doing anything about it, and the people who actually have to learn are being left behind. Find the angle.",hint:"Write the full blog post. Aim for 400–500 words. Find the narrative — don't just list the stats."}
 ];
 
 var candidateName='', candidateEmail='';
@@ -445,12 +445,4 @@ function finalise(){
 
 function restart(){
   if(timerInterval)clearInterval(timerInterval);
-  activeId=null;answered=[];results=[];
-  candidateName='';candidateEmail='';
-  document.getElementById('f-name').value='';
-  document.getElementById('f-email').value='';
-  showScreen('screen-intro');
-}
-</script>
-</body>
-</html>
+  ac
