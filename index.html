@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docebo — Content Ops Challenge</title>
+<title>Docebo Content Ops Challenge</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -14,9 +14,9 @@
   --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
   --blue:#0057FF;--green:#16a34a;--red:#dc2626;--amber:#d97706;
   --blue-bg:#eff6ff;--blue-text:#1d4ed8;--blue-border:#bfdbfe;
-  --beige-bg:#fefce8;--beige-text:#854d0e;
   --purple-bg:#faf5ff;--purple-border:#e9d5ff;--purple-text:#7e22ce;
   --teal-bg:#f0fdfa;--teal-border:#99f6e4;--teal-text:#0f766e;
+  --beige-bg:#fefce8;--beige-text:#854d0e;
 }
 html{font-size:16px;}
 body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;}
@@ -103,11 +103,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 .badge-writing{background:var(--purple-bg);color:var(--purple-text);}
 .msg-from{font-size:.8125rem;color:var(--text2);}
 .msg-from strong{color:var(--text);font-weight:500;}
-.msg-body{padding:.875rem 1rem 1.125rem;font-size:.9375rem;line-height:1.75;color:var(--text2);border-bottom:1px solid var(--border);}
-.msg-brief{padding:.75rem 1rem;background:var(--teal-bg);border-bottom:1px solid var(--teal-border);}
-.msg-brief-label{font-family:'Geist Mono',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-text);font-weight:500;margin-bottom:.4rem;}
-.msg-brief-body{font-size:.8125rem;line-height:1.7;color:var(--teal-text);}
-.msg-brief-body li{margin-left:1rem;margin-bottom:.2rem;}
+.msg-body{padding:.875rem 1rem 1.125rem;font-size:.9375rem;line-height:1.75;color:var(--text2);border-bottom:1px solid var(--border);white-space:pre-line;}
 .timer-row{display:flex;align-items:center;gap:.75rem;padding:.625rem 1rem;border-bottom:1px solid var(--border);background:var(--bg2);}
 .timer-label{font-family:'Geist Mono',monospace;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);font-weight:500;}
 .timer-track{flex:1;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
@@ -153,23 +149,23 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 
 <div id="screen-intro" class="screen active">
   <h1 class="intro-title">Your inbox is<br><em>on fire.</em></h1>
-  <p class="intro-body">Eight messages. Real situations. Some ask how you'd handle something. Two ask you to actually write. The clock starts the moment you open each one.</p>
-  <p class="intro-body">No multiple choice. No right answers on the back. Just show us how you think — and how you write.</p>
+  <p class="intro-body">Eight messages. Real situations. Some ask how you would handle something. Two ask you to actually write. The clock starts the moment you open each one.</p>
+  <p class="intro-body">No multiple choice. No right answers on the back. Just show us how you think and how you write.</p>
   <div class="intro-meta">
     <div class="meta-item">Messages <strong>8</strong></div>
     <div class="meta-item">Timer <strong>Varies</strong></div>
-    <div class="meta-item">Takes <strong>~60–90 min</strong></div>
+    <div class="meta-item">Takes <strong>~60-90 min</strong></div>
   </div>
   <div class="task-types">
     <div class="task-type-card decision">
       <div class="ttc-label">Decision tasks</div>
       <div class="ttc-title">6 messages</div>
-      <div class="ttc-desc">Real scenarios. Tell us what you'd do and why. 2.5 minutes each.</div>
+      <div class="ttc-desc">Real scenarios. Tell us what you would do and why. 2.5 minutes each.</div>
     </div>
     <div class="task-type-card writing">
       <div class="ttc-label">Writing tasks</div>
       <div class="ttc-title">2 messages</div>
-      <div class="ttc-desc">One LinkedIn post. One blog. Brief provided. Write the actual thing.</div>
+      <div class="ttc-desc">One LinkedIn post. One blog. Write the actual thing.</div>
     </div>
   </div>
   <label class="field-label" for="f-name">Your name</label>
@@ -178,14 +174,14 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
   <label class="field-label" for="f-email">Email address</label>
   <input class="field-input" type="email" id="f-email" placeholder="you@company.com" autocomplete="email">
   <div class="field-error" id="err-email">Please enter a valid email</div>
-  <button class="start-btn" onclick="startGame()">Open inbox &rarr;</button>
+  <button class="start-btn" onclick="startGame()">Open inbox</button>
 </div>
 
 <div id="screen-game" class="screen">
   <div class="game-header">
     <div class="gh-left">
       <div class="gh-live"><div class="live-dot"></div><span class="gh-live-text">Live</span></div>
-      <div class="gh-name">Inbox &mdash; <strong id="gh-name-display"></strong></div>
+      <div class="gh-name">Inbox <strong id="gh-name-display"></strong></div>
     </div>
     <div class="progress-lbl" id="progress-lbl">0 / 8</div>
   </div>
@@ -195,7 +191,7 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
       <span class="inbox-topbar-right">Today</span>
     </div>
     <div class="inbox-explainer">
-      <p><strong>How this works:</strong> Open each message and respond. Decision tasks: tell us what you'd do. Writing tasks: write the actual thing. Timer starts when you open a message. Work in any order.</p>
+      <p><strong>How this works:</strong> Open each message and respond. Decision tasks: tell us what you would do. Writing tasks: write the actual thing. Timer starts when you open a message. Work in any order.</p>
     </div>
     <div class="inbox-list" id="inbox-list"></div>
   </div>
@@ -209,10 +205,6 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
       <div class="msg-from" id="msg-from"></div>
     </div>
     <div class="msg-body" id="msg-body"></div>
-    <div class="msg-brief" id="msg-brief" style="display:none;">
-      <div class="msg-brief-label">Brief</div>
-      <div class="msg-brief-body" id="msg-brief-body"></div>
-    </div>
     <div class="timer-row">
       <span class="timer-label">Time to respond</span>
       <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
@@ -222,227 +214,295 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
       <div class="reply-label" id="reply-label">Your reply</div>
       <textarea class="reply-textarea" id="reply-textarea" placeholder="Type your response..."></textarea>
       <div class="reply-footer">
-        <span class="char-hint" id="char-hint">Be direct. A few sentences is enough.</span>
-        <button class="send-btn" id="send-btn" onclick="sendReply()">Send &rarr;</button>
+        <span class="char-hint" id="char-hint"></span>
+        <button class="send-btn" id="send-btn" onclick="sendReply()">Send</button>
       </div>
     </div>
     <div class="sending-strip" id="sending-strip"><div class="spinner"></div><span>Sending...</span></div>
-    <div class="timeout-strip" id="timeout-strip">Time's up — moving on.</div>
-    <button class="next-btn" id="next-btn" onclick="nextMessage()">Next message &rarr;</button>
+    <div class="timeout-strip" id="timeout-strip">Time is up. Moving on.</div>
+    <button class="next-btn" id="next-btn" onclick="nextMessage()">Next message</button>
   </div>
 </div>
 
 <div id="screen-result" class="screen result-screen">
   <div class="r-eyebrow"><div class="r-dot"></div><span class="r-dot-label">Inbox cleared</span></div>
-  <h1 class="r-title">That's a wrap,<br><em><span id="r-first-name"></span>.</em></h1>
-  <p class="r-sub">All eight messages handled. We'll review your responses and be in touch about next steps.</p>
-  <p class="r-next">Questions in the meantime? Reach out to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b21242e0b2f24282e292465282426">[email&#160;protected]</a></strong></p>
+  <h1 class="r-title">That is a wrap,<br><em><span id="r-first-name"></span>.</em></h1>
+  <p class="r-sub">All eight messages handled. We will review your responses and be in touch about next steps.</p>
+  <p class="r-next">Questions in the meantime? Reach out to <strong>joe@docebo.com</strong></p>
   <button class="restart-btn" onclick="restart()">Start over</button>
 </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+<script>
+var SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
-var messages = [
-  {id:0,type:"decision",sender:"Kyle Lacy",role:"CMO",av:"KL",avClass:"av-blue",time:"8:47am",timer:150,subject:"Quick question before QBR — content north star",preview:"What's the one number we track?",rubric:"Strong: proposes third-party amplification, earned citation, analyst/influencer reference. Rejects pipeline attribution. Understands why attribution is broken. Weak: leads with downloads, traffic, MQLs.",brief:null,body:"Hey — heading into QBR prep. I want to table the attribution debate for good. Give me one metric that proves content is working. Something nobody can argue with. Pipeline attribution is off the table — too much noise. What are we tracking?",hint:"Be direct. A few sentences is enough."},
-  {id:1,type:"decision",sender:"Alessio Artuffo",role:"CEO",av:"AA",avClass:"av-red",time:"9:03am",timer:150,subject:"Content system — where are we",preview:"What's the first thing you're actually building",rubric:"Strong: describes something concrete — workflow map, working prototype, specific tool or prompt system. Something that exists now. Weak: discovery process, stakeholder audit, tool evaluation, anything delaying building.",brief:null,body:"Hey — wanted to check in on the AI content system. I know you've been given the mandate to build it. Walk me through it. Where did you start and what does the first version actually look like? Not the strategy deck — the thing you're building.",hint:"Be direct. A few sentences is enough."},
-  {id:2,type:"decision",sender:"Slack: #content-ops",role:"Internal",av:"#",avClass:"av-purple",time:"9:31am",timer:150,subject:"AI draft is up — but something's off",preview:"The CEO piece doesn't sound like him at all",rubric:"Strong: goes straight to the prompt as the problem. Identifies missing voice constraints, example sentences, banned phrases. Treats it as an engineering problem. Mentions fixing piece while improving system. Weak: rewrites manually, blames AI, asks for more time.",brief:null,body:"Dropped the AI draft for Alessio's thought leadership piece in the shared doc. Factually solid, well-structured. But it reads like a generic B2B blog post. Confident, no personality. Not him, not us. He wants to review it Wednesday EOD.",hint:"Be direct. A few sentences is enough."},
-  {id:3,type:"decision",sender:"Kyle Lacy",role:"CMO",av:"KL",avClass:"av-blue",time:"10:12am",timer:150,subject:"Four vertical reports. Twelve months. Two people. Go.",preview:"Leadership wants the AI readiness format for four industries",rubric:"Strong: proposes building a repeatable system before starting — a research-to-publish playbook. May raise resourcing but leads with the system. Weak: do Q1 and figure out rest later, outsource to agencies, lead with headcount ask.",brief:null,body:"Leadership signed off on four vertical versions of the AI Readiness Report — government, life sciences, financial services, retail. Each needs original research, a report, a campaign, and a webinar. One per quarter. Your team is you and a senior writer for now. New hires aren't confirmed. How do you approach this?",hint:"Be direct. A few sentences is enough."},
-  {id:4,type:"decision",sender:"Priya Nair",role:"Demand Gen",av:"PN",avClass:"av-green",time:"10:44am",timer:150,subject:"Content ask — CLO campaign, 3 weeks",preview:"Need a whitepaper for the paid push",rubric:"Strong: challenges the format. Proposes something more specific — original data, diagnostic, benchmark. CLOs don't convert on generic whitepapers. Weak: accepts whitepaper brief, asks for more time, produces lighter asset without rationale.",brief:null,body:"Hi — launching a paid campaign targeting CLOs at enterprise companies next month. Need a content offer strong enough to drive form fills. We're thinking a whitepaper on AI readiness. Can you scope this for a 3-week turnaround? Team is you and one writer right now.",hint:"Be direct. A few sentences is enough."},
-  {id:5,type:"decision",sender:"Slack: #general",role:"Internal",av:"#",avClass:"av-purple",time:"11:20am",timer:150,subject:"Demand gen wants access to the AI system",preview:"Can we use it for email copy and landing pages?",rubric:"Strong: says yes immediately. Offers walkthrough. Invites feedback to improve system. No gatekeeping, no permission-seeking. Weak: checks with manager first, calls it beta, scopes custom version before sharing, stalls.",brief:null,body:"Hey — heard you built an AI content workflow for the content team. Any chance demand gen can use it directly? We want to spin up email copy and landing page variants without going through content review each time. No formal request, just checking.",hint:"Be direct. A few sentences is enough."},
-  {id:6,type:"writing",sender:"Alessio Artuffo",role:"CEO",av:"AA",avClass:"av-red",time:"1:15pm",timer:900,subject:"Need a LinkedIn post — workforce readiness angle",preview:"Writing task — 15 minutes",rubric:"Strong: writes in a confident, first-person exec voice. Makes a specific, non-obvious argument. Doesn't just summarize facts — turns an idea into a point of view. Avoids generic B2B language, em dashes, buzzwords. Shows they can write with personality and conviction. Weak: generic commentary, listicle format, sounds like a press release, heavy AI-speak, no real POV.",brief:"Alessio has been thinking about why some companies are pulling ahead on AI adoption while others are stalling. His take: it's not about the technology stack — the real competitive moat is workforce readiness. The companies winning on AI aren't buying better tools. They're closing the skills gap faster. Write a LinkedIn post in Alessio's voice making this argument. It should feel like a CEO who has thought hard about this — not a marketing exec summarizing a report. Aim for 150–200 words.",body:"Hey — I need a LinkedIn post drafted today. I've been sitting on this idea for a while and want to get it out. Brief is below. Write it in my voice — direct, no fluff, something people will actually want to read.",hint:"Write the actual post. Aim for 150–200 words. First person, Alessio's voice."},
-  {id:7,type:"writing",sender:"Joe Rosengarten",role:"Director, Content",av:"JR",avClass:"av-blue",time:"2:40pm",timer:3600,subject:"Blog brief — AI Readiness Report",preview:"Writing task — 1 hour",rubric:"Strong: finds a narrative angle rather than just summarizing the data. Leads with a hook, not a stat. Uses the numbers to build an argument, not a listicle. Has a clear POV and conclusion. Writes in plain, direct language — no jargon, no AI-speak. Weak: opens with a stat, bullet-point structure, no real argument, reads like a press release, generic conclusions.",brief:null,body:"Here's a blog brief from the AI Readiness Report data. I've pulled some of the numbers and there's a bit of a brief below.\n\nThe data: 79% of learning leaders say they have the tools they need for AI. Only 9% have used those tools to actually transform how work gets done. 85% of learners say current training doesn't prepare them for AI in their role. 60% of learners say their learning program wasn't designed for them.\n\nThe tension in the data is the story: everyone thinks they're ready, almost nobody is doing anything about it, and the people who actually have to learn are being left behind. Find the angle.",hint:"Write the full blog post. Aim for 400–500 words. Find the narrative — don't just list the stats."}
+var MSG = [
+  {
+    id: 0, type: "decision", timer: 150,
+    sender: "Kyle Lacy", role: "CMO", av: "KL", avc: "av-blue", time: "8:47am",
+    subj: "Quick question before QBR",
+    prev: "What is the one number we track?",
+    body: "Hey - heading into QBR prep. I want to table the attribution debate for good. Give me one metric that proves content is working. Something nobody can argue with. Pipeline attribution is off the table - too much noise. What are we tracking?",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: proposes third-party amplification, earned citation, analyst or influencer reference. Rejects pipeline attribution. Understands why attribution is broken. Weak: leads with downloads, traffic, MQLs."
+  },
+  {
+    id: 1, type: "decision", timer: 150,
+    sender: "Alessio Artuffo", role: "CEO", av: "AA", avc: "av-red", time: "9:03am",
+    subj: "Content system - where are we",
+    prev: "What is the first thing you are actually building",
+    body: "Hey - wanted to check in on the AI content system. I know you have been given the mandate to build it. Walk me through it. Where did you start and what does the first version actually look like? Not the strategy deck - the thing you are building.",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: describes something concrete - workflow map, working prototype, specific tool or prompt system. Something that exists now. Weak: discovery process, stakeholder audit, tool evaluation, anything delaying building."
+  },
+  {
+    id: 2, type: "decision", timer: 150,
+    sender: "Slack: #content-ops", role: "Internal", av: "#", avc: "av-purple", time: "9:31am",
+    subj: "AI draft is up but something is off",
+    prev: "The CEO piece does not sound like him at all",
+    body: "Dropped the AI draft for Alessio thought leadership piece in the shared doc. Factually solid, well-structured. But it reads like a generic B2B blog post. Confident, no personality. Not him, not us. He wants to review it Wednesday EOD.",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: goes straight to the prompt as the problem. Identifies missing voice constraints, example sentences, banned phrases. Treats it as an engineering problem. Mentions fixing piece while improving system. Weak: rewrites manually, blames AI, asks for more time."
+  },
+  {
+    id: 3, type: "decision", timer: 150,
+    sender: "Kyle Lacy", role: "CMO", av: "KL", avc: "av-blue", time: "10:12am",
+    subj: "Four vertical reports. Twelve months. Two people. Go.",
+    prev: "Leadership wants AI readiness for four industries",
+    body: "Leadership signed off on four vertical versions of the AI Readiness Report - government, life sciences, financial services, retail. Each needs original research, a report, a campaign, and a webinar. One per quarter. Your team is you and a senior writer for now. New hires are not confirmed. How do you approach this?",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: proposes building a repeatable system before starting - a research-to-publish playbook. May raise resourcing but leads with the system. Weak: do Q1 and figure out rest later, outsource to agencies, lead with headcount ask."
+  },
+  {
+    id: 4, type: "decision", timer: 150,
+    sender: "Silvia Valencia", role: "Demand Gen", av: "SV", avc: "av-green", time: "10:44am",
+    subj: "Content ask - CLO campaign, 3 weeks",
+    prev: "Need a whitepaper for the paid push",
+    body: "Hi - launching a paid campaign targeting CLOs at enterprise companies next month. Need a content offer strong enough to drive form fills. We are thinking a whitepaper on AI readiness. Can you scope this for a 3-week turnaround? Team is you and one writer right now.",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: challenges the format. Proposes something more specific - original data, diagnostic, benchmark. CLOs do not convert on generic whitepapers. Weak: accepts whitepaper brief, asks for more time, produces lighter asset without rationale."
+  },
+  {
+    id: 5, type: "decision", timer: 150,
+    sender: "Slack: #general", role: "Internal", av: "#", avc: "av-purple", time: "11:20am",
+    subj: "Demand gen wants access to the AI system",
+    prev: "Can we use it for email copy and landing pages?",
+    body: "Hey - heard you built an AI content workflow for the content team. Any chance demand gen can use it directly? We want to spin up email copy and landing page variants without going through content review each time. No formal request, just checking.",
+    hint: "Be direct. A few sentences is enough.",
+    rubric: "Strong: says yes immediately. Offers walkthrough. Invites feedback to improve system. No gatekeeping, no permission-seeking. Weak: checks with manager first, calls it beta, scopes custom version before sharing, stalls."
+  },
+  {
+    id: 6, type: "writing", timer: 900,
+    sender: "Alessio Artuffo", role: "CEO", av: "AA", avc: "av-red", time: "1:15pm",
+    subj: "Need a LinkedIn post drafted today",
+    prev: "Writing task - 15 minutes",
+    body: "Hey - I need a LinkedIn post drafted today. I have been sitting on this idea for a while and want to get it out. Write it in my voice.\n\nSome companies are pulling ahead on AI adoption while others are stalling. It is not about the technology stack. The real competitive moat is workforce readiness. The companies winning on AI are not buying better tools. They are closing the skills gap faster.",
+    hint: "Write the actual post. Aim for 150 to 200 words. First person, in Alessio voice.",
+    rubric: "Strong: writes in a confident first-person exec voice. Makes a specific non-obvious argument. Turns an idea into a point of view. Avoids generic B2B language and buzzwords. Shows personality and conviction. Weak: generic commentary, listicle format, sounds like a press release, heavy AI-speak, no real POV."
+  },
+  {
+    id: 7, type: "writing", timer: 3600,
+    sender: "Joe Rosengarten", role: "Director, Content", av: "JR", avc: "av-blue", time: "2:40pm",
+    subj: "Blog brief - AI Readiness Report",
+    prev: "Writing task - 1 hour",
+    body: "Here is a blog brief from the AI Readiness Report data. I have pulled some of the numbers and there is a bit of a brief below.\n\nThe data: 79% of learning leaders say they have the tools they need for AI. Only 9% have used those tools to actually transform how work gets done. 85% of learners say current training does not prepare them for AI in their role. 60% of learners say their learning program was not designed for them.\n\nThe tension in the data is the story: everyone thinks they are ready, almost nobody is doing anything about it, and the people who actually have to learn are being left behind. Find the angle.",
+    hint: "Write the full blog post. Aim for 400 to 500 words. Find the narrative - do not just list the stats.",
+    rubric: "Strong: finds a narrative angle rather than summarizing the data. Leads with a hook not a stat. Uses numbers to build an argument not a listicle. Has a clear POV and conclusion. Plain direct language. Weak: opens with a stat, bullet-point structure, no real argument, reads like a press release, generic conclusions."
+  }
 ];
 
-var candidateName='', candidateEmail='';
-var activeId=null, timerInterval=null, timeLeft=0, totalTime=0;
-var answered=[], results=[];
+var cname = "", cemail = "";
+var activeId = null, tiv = null, tleft = 0, ttotal = 0;
+var answered = [], results = [];
 
-function hasAnswered(id){ return answered.indexOf(id) > -1; }
-
-function fmtTime(secs){
-  if(secs >= 60){
-    var m=Math.floor(secs/60);
-    var s=secs%60;
-    return m+':'+(s<10?'0':'')+s;
-  }
-  return secs+'s';
+function has(id) {
+  for (var i = 0; i < answered.length; i++) { if (answered[i] === id) return true; }
+  return false;
 }
 
-function startGame(){
-  var name=document.getElementById('f-name').value.trim();
-  var email=document.getElementById('f-email').value.trim();
-  var valid=true;
-  if(!name){document.getElementById('err-name').classList.add('show');valid=false;}
-  else{document.getElementById('err-name').classList.remove('show');}
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){document.getElementById('err-email').classList.add('show');valid=false;}
-  else{document.getElementById('err-email').classList.remove('show');}
-  if(!valid)return;
-  candidateName=name; candidateEmail=email;
-  document.getElementById('gh-name-display').textContent=name.split(' ')[0];
-  showScreen('screen-game');
+function fmtTime(s) {
+  if (s >= 3600) {
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = s % 60;
+    return h + ":" + (m < 10 ? "0" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+  }
+  if (s >= 60) {
+    var m2 = Math.floor(s / 60);
+    var sec2 = s % 60;
+    return m2 + ":" + (sec2 < 10 ? "0" : "") + sec2;
+  }
+  return s + "s";
+}
+
+function el(id) { return document.getElementById(id); }
+
+function startGame() {
+  var name = el("f-name").value.trim();
+  var email = el("f-email").value.trim();
+  var ok = true;
+  if (!name) { el("err-name").classList.add("show"); ok = false; } else { el("err-name").classList.remove("show"); }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { el("err-email").classList.add("show"); ok = false; } else { el("err-email").classList.remove("show"); }
+  if (!ok) return;
+  cname = name; cemail = email;
+  el("gh-name-display").textContent = name.split(" ")[0];
+  showScreen("screen-game");
   renderInbox();
 }
 
-function showScreen(id){
-  var screens=document.querySelectorAll('.screen');
-  for(var i=0;i<screens.length;i++){screens[i].classList.remove('active');}
-  document.getElementById(id).classList.add('active');
+function showScreen(id) {
+  var ss = document.querySelectorAll(".screen");
+  for (var i = 0; i < ss.length; i++) ss[i].classList.remove("active");
+  el(id).classList.add("active");
 }
 
-function renderInbox(){
-  var list=document.getElementById('inbox-list');
-  list.innerHTML='';
-  for(var i=0;i<messages.length;i++){
-    var m=messages[i];
-    var res=null;
-    for(var j=0;j<results.length;j++){if(results[j].id===m.id){res=results[j];break;}}
-    var isActive=activeId===m.id;
-    var cls='inbox-item';
-    if(res)cls+=' idone';
-    else if(isActive)cls+=' iactive';
-    else cls+=' unread';
-    var el=document.createElement('div');
-    el.className=cls;
-    if(!res)(function(mid){el.onclick=function(){openMessage(mid);};})(m.id);
-    var dotCls='item-dot ';
-    if(res&&!res.timedOut)dotCls+='dot-done';
-    else if(res&&res.timedOut)dotCls+='dot-timeout';
-    else if(!res&&!isActive)dotCls+='dot-unread';
-    else dotCls+='dot-empty';
-    var tagHtml='<span class="item-type-tag '+(m.type==='writing'?'tag-writing':'tag-decision')+'">'+(m.type==='writing'?'writing':'decision')+'</span>';
-    el.innerHTML='<div class="avatar '+m.avClass+'">'+m.av+'</div><div class="item-body"><div class="item-top"><span class="item-sender">'+m.sender+'</span><span class="item-time">'+m.time+'</span></div><div class="item-subject">'+m.subject+'</div><div class="item-preview">'+m.preview+'</div></div><div class="item-right">'+tagHtml+'<div class="'+dotCls+'"></div></div>';
-    list.appendChild(el);
-  }
-  var done=results.length;
-  document.getElementById('unread-count').textContent=Math.max(0,messages.length-done);
-  document.getElementById('progress-lbl').textContent=done+' / '+messages.length;
+function getMsg(id) {
+  for (var i = 0; i < MSG.length; i++) { if (MSG[i].id === id) return MSG[i]; }
+  return null;
 }
 
-function openMessage(id){
-  if(hasAnswered(id)||activeId===id)return;
-  if(timerInterval)clearInterval(timerInterval);
-  activeId=id;
-  var m=null;
-  for(var i=0;i<messages.length;i++){if(messages[i].id===id){m=messages[i];break;}}
-  document.getElementById('empty-pane').style.display='none';
-  document.getElementById('message-pane').style.display='block';
-  document.getElementById('msg-subject').textContent=m.subject;
-  document.getElementById('msg-from').innerHTML='<strong>'+m.sender+'</strong> &nbsp;&middot;&nbsp; '+m.role;
-  document.getElementById('msg-body').textContent=m.body;
-  var badge=document.getElementById('msg-type-badge');
-  badge.textContent=m.type==='writing'?'Writing task':'Decision task';
-  badge.className='msg-type-badge '+(m.type==='writing'?'badge-writing':'badge-decision');
-  var briefEl=document.getElementById('msg-brief');
-  var briefBody=document.getElementById('msg-brief-body');
-  if(m.brief){
-    briefBody.textContent=m.brief;
-    briefEl.style.display='block';
-  } else {
-    briefEl.style.display='none';
+function renderInbox() {
+  var list = el("inbox-list");
+  list.innerHTML = "";
+  for (var i = 0; i < MSG.length; i++) {
+    var m = MSG[i];
+    var done = has(m.id);
+    var isAct = activeId === m.id;
+    var cls = "inbox-item " + (done ? "idone" : isAct ? "iactive" : "unread");
+    var div = document.createElement("div");
+    div.className = cls;
+    if (!done) (function(mid) { div.onclick = function() { openMsg(mid); }; })(m.id);
+    var dotCls = "item-dot " + (done ? "dot-done" : (!done && !isAct ? "dot-unread" : "dot-empty"));
+    var tag = '<span class="item-type-tag ' + (m.type === "writing" ? "tag-writing" : "tag-decision") + '">' + m.type + '</span>';
+    div.innerHTML = '<div class="avatar ' + m.avc + '">' + m.av + '</div>' +
+      '<div class="item-body"><div class="item-top"><span class="item-sender">' + m.sender + '</span><span class="item-time">' + m.time + '</span></div>' +
+      '<div class="item-subject">' + m.subj + '</div><div class="item-preview">' + m.prev + '</div></div>' +
+      '<div class="item-right">' + tag + '<div class="' + dotCls + '"></div></div>';
+    list.appendChild(div);
   }
-  var ta=document.getElementById('reply-textarea');
-  ta.value='';ta.disabled=false;
-  ta.style.minHeight=m.type==='writing'?'240px':'96px';
-  document.getElementById('reply-label').textContent=m.type==='writing'?'Your response':'Your reply';
-  document.getElementById('char-hint').textContent=m.hint;
-  document.getElementById('send-btn').disabled=false;
-  document.getElementById('sending-strip').className='sending-strip';
-  document.getElementById('timeout-strip').className='timeout-strip';
-  document.getElementById('next-btn').className='next-btn';
+  var done2 = results.length;
+  el("unread-count").textContent = Math.max(0, MSG.length - done2);
+  el("progress-lbl").textContent = done2 + " / " + MSG.length;
+}
+
+function openMsg(id) {
+  if (has(id) || activeId === id) return;
+  if (tiv) clearInterval(tiv);
+  activeId = id;
+  var m = getMsg(id);
+  el("empty-pane").style.display = "none";
+  el("message-pane").style.display = "block";
+  el("msg-subject").textContent = m.subj;
+  el("msg-from").innerHTML = "<strong>" + m.sender + "</strong> &nbsp;&middot;&nbsp; " + m.role;
+  el("msg-body").textContent = m.body;
+  var badge = el("msg-type-badge");
+  badge.textContent = m.type === "writing" ? "Writing task" : "Decision task";
+  badge.className = "msg-type-badge " + (m.type === "writing" ? "badge-writing" : "badge-decision");
+  var ta = el("reply-textarea");
+  ta.value = ""; ta.disabled = false;
+  ta.style.minHeight = m.type === "writing" ? "260px" : "96px";
+  el("reply-label").textContent = m.type === "writing" ? "Your response" : "Your reply";
+  el("char-hint").textContent = m.hint;
+  el("send-btn").disabled = false;
+  el("sending-strip").className = "sending-strip";
+  el("timeout-strip").className = "timeout-strip";
+  el("next-btn").className = "next-btn";
   renderInbox();
-  startTimer(m.timer,id);
+  startTimer(m.timer, id);
 }
 
-function startTimer(secs,id){
-  totalTime=secs;timeLeft=secs;
-  updateTimer(secs,secs);
-  timerInterval=setInterval(function(){
-    timeLeft--;
-    updateTimer(timeLeft,totalTime);
-    if(timeLeft<=0){clearInterval(timerInterval);handleTimeout(id);}
-  },1000);
+function startTimer(secs, id) {
+  ttotal = secs; tleft = secs;
+  updateTimer(secs, secs);
+  tiv = setInterval(function() {
+    tleft--;
+    updateTimer(tleft, ttotal);
+    if (tleft <= 0) { clearInterval(tiv); doTimeout(id); }
+  }, 1000);
 }
 
-function updateTimer(left,total){
-  var pct=Math.max(0,(left/total)*100);
-  var fill=document.getElementById('timer-fill');
-  var num=document.getElementById('timer-num');
-  if(!fill)return;
-  fill.style.width=pct+'%';
-  fill.style.background=pct>50?'#0057FF':pct>25?'#d97706':'#dc2626';
-  num.textContent=fmtTime(left);
-  num.className='timer-num'+(left<=30?' urgent':'');
+function updateTimer(left, total) {
+  var pct = Math.max(0, (left / total) * 100);
+  var fill = el("timer-fill");
+  var num = el("timer-num");
+  if (!fill) return;
+  fill.style.width = pct + "%";
+  fill.style.background = pct > 50 ? "#0057FF" : pct > 25 ? "#d97706" : "#dc2626";
+  num.textContent = fmtTime(left);
+  num.className = "timer-num" + (left <= 30 ? " urgent" : "");
 }
 
-function handleTimeout(id){
-  if(hasAnswered(id))return;
+function doTimeout(id) {
+  if (has(id)) return;
   answered.push(id);
-  var m=null;
-  for(var i=0;i<messages.length;i++){if(messages[i].id===id){m=messages[i];break;}}
-  var ta=document.getElementById('reply-textarea');
-  var responseText=ta.value.trim();
-  ta.disabled=true;
-  document.getElementById('send-btn').disabled=true;
-  document.getElementById('timeout-strip').className='timeout-strip show';
-  document.getElementById('next-btn').className='next-btn show';
-  var result={id:id,timedOut:true,response:responseText||'[no response]',subject:m.subject,rubric:m.rubric,timeUsed:m.timer,sender:m.sender,type:m.type};
-  results.push(result);
-  submitResult(result,m);
+  var m = getMsg(id);
+  var ta = el("reply-textarea");
+  var txt = ta.value.trim();
+  ta.disabled = true;
+  el("send-btn").disabled = true;
+  el("timeout-strip").className = "timeout-strip show";
+  el("next-btn").className = "next-btn show";
+  var r = {id: id, timedOut: true, response: txt || "[no response]", subject: m.subj, rubric: m.rubric, timeUsed: m.timer, sender: m.sender, type: m.type};
+  results.push(r);
+  submit(r);
   renderInbox();
-  if(results.length===messages.length)setTimeout(finalise,1400);
+  if (results.length === MSG.length) setTimeout(finalise, 1400);
 }
 
-function sendReply(){
-  if(timerInterval)clearInterval(timerInterval);
-  var ta=document.getElementById('reply-textarea');
-  var text=ta.value.trim();
-  if(!text){ta.focus();return;}
-  var id=activeId;
-  if(hasAnswered(id))return;
+function sendReply() {
+  if (tiv) clearInterval(tiv);
+  var ta = el("reply-textarea");
+  var txt = ta.value.trim();
+  if (!txt) { ta.focus(); return; }
+  var id = activeId;
+  if (has(id)) return;
   answered.push(id);
-  ta.disabled=true;
-  document.getElementById('send-btn').disabled=true;
-  document.getElementById('sending-strip').className='sending-strip show';
-  var m=null;
-  for(var i=0;i<messages.length;i++){if(messages[i].id===id){m=messages[i];break;}}
-  var timeUsed=totalTime-timeLeft;
-  var result={id:id,timedOut:false,response:text,subject:m.subject,rubric:m.rubric,timeUsed:timeUsed,sender:m.sender,type:m.type};
-  results.push(result);
-  submitResult(result,m);
-  setTimeout(function(){
-    document.getElementById('sending-strip').className='sending-strip';
-    document.getElementById('next-btn').className='next-btn show';
+  ta.disabled = true;
+  el("send-btn").disabled = true;
+  el("sending-strip").className = "sending-strip show";
+  var m = getMsg(id);
+  var tu = ttotal - tleft;
+  var r = {id: id, timedOut: false, response: txt, subject: m.subj, rubric: m.rubric, timeUsed: tu, sender: m.sender, type: m.type};
+  results.push(r);
+  submit(r);
+  setTimeout(function() {
+    el("sending-strip").className = "sending-strip";
+    el("next-btn").className = "next-btn show";
     renderInbox();
-    if(results.length===messages.length)setTimeout(finalise,1400);
-  },600);
+    if (results.length === MSG.length) setTimeout(finalise, 1400);
+  }, 600);
 }
 
-function submitResult(result,m){
-  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
-    console.log('Result:',result);return;
-  }
-  var payload={candidate_name:candidateName,candidate_email:candidateEmail,message_id:result.id,message_type:result.type,message_subject:result.subject,sender:result.sender,response:result.response,timed_out:result.timedOut,time_used_seconds:result.timeUsed,timestamp:new Date().toISOString(),rubric:m.rubric};
-  fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(e){console.error(e);});
+function submit(r) {
+  if (!SCRIPT_URL || SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") { console.log("Result:", r); return; }
+  var p = {candidate_name: cname, candidate_email: cemail, message_id: r.id, message_type: r.type, message_subject: r.subject, sender: r.sender, response: r.response, timed_out: r.timedOut, time_used_seconds: r.timeUsed, timestamp: new Date().toISOString(), rubric: r.rubric};
+  fetch(SCRIPT_URL, {method: "POST", mode: "no-cors", headers: {"Content-Type": "application/json"}, body: JSON.stringify(p)}).catch(function(e) { console.error(e); });
 }
 
-function nextMessage(){
-  var remaining=0;
-  for(var i=0;i<messages.length;i++){if(!hasAnswered(messages[i].id))remaining++;}
-  if(remaining===0){finalise();return;}
-  document.getElementById('empty-pane').style.display='block';
-  document.getElementById('message-pane').style.display='none';
-  activeId=null;
+function nextMessage() {
+  var rem = 0;
+  for (var i = 0; i < MSG.length; i++) { if (!has(MSG[i].id)) rem++; }
+  if (rem === 0) { finalise(); return; }
+  el("empty-pane").style.display = "block";
+  el("message-pane").style.display = "none";
+  activeId = null;
   renderInbox();
 }
 
-function finalise(){
-  if(timerInterval)clearInterval(timerInterval);
-  document.getElementById('r-first-name').textContent=candidateName.split(' ')[0];
-  showScreen('screen-result');
+function finalise() {
+  if (tiv) clearInterval(tiv);
+  el("r-first-name").textContent = cname.split(" ")[0];
+  showScreen("screen-result");
 }
 
-function restart(){
-  if(timerInterval)clearInterval(timerInterval);
-  ac
+function restart() {
+  if (tiv) clearInterval(tiv);
+  activeId = null; answered = []; results = [];
+  cname = ""; cemail = "";
+  el("f-name").value = "";
+  el("f-email").value = "";
+  showScreen("screen-intro");
+}
+</script>
+</body>
+</html>
