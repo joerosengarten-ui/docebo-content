@@ -407,3 +407,16 @@ function finalise(){
   if(tiv)clearInterval(tiv);
   el("r-first-name").textContent=cname.split(" ")[0];
   showScreen("screen-result")
+}
+
+function restart(){
+  if(tiv)clearInterval(tiv);
+  activeId=null;answered=[];results=[];
+  cname="";cemail="";
+  el("f-name").value="";
+  el("f-email").value="";
+  showScreen("screen-intro");
+}
+</script>
+</body>
+</html>
