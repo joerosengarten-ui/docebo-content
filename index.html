@@ -146,7 +146,19 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 <div id="app">
 <div class="toast" id="toast"></div>
 
-<div id="screen-intro" class="screen active">
+
+<div id="screen-password" class="screen active">
+  <h1 class="intro-title">Your inbox is<br><em>on fire.</em></h1>
+  <p class="intro-body">Enter the access code to begin.</p>
+  <div style="margin-top:1.5rem;">
+    <label class="field-label" for="f-password">Access code</label>
+    <input class="field-input" type="password" id="f-password" placeholder="Enter code" style="letter-spacing:.1em;">
+    <div class="field-error" id="err-password">Incorrect code. Please try again.</div>
+  </div>
+  <button class="start-btn" onclick="checkPassword()" style="margin-top:1rem;">Continue</button>
+</div>
+
+<div id="screen-intro" class="screen">
   <h1 class="intro-title">Your inbox is<br><em>on fire.</em></h1>
   <p class="intro-body">Seven messages. Real situations. Some ask how you would handle something. Two ask you to actually write. The clock starts the moment you open each one.</p>
   <p class="intro-body">No multiple choice. No right answers on the back. Just show us how you think and how you write.</p>
@@ -230,7 +242,14 @@ body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;min-h
 </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+document.addEventListener("DOMContentLoaded",function(){
+  var pwField=document.getElementById("f-password");
+  if(pwField){pwField.addEventListener("keydown",function(e){if(e.key==="Enter")checkPassword();});}
+  var nameField=document.getElementById("f-name");
+  if(nameField){nameField.addEventListener("keydown",function(e){if(e.key==="Enter")startGame();});}
+});
+</script><script>
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyinrO2BeNYrIfI4ZCAE2INNDjQdhaTUVupHserPkR55sG1OuXO3p-vE2bu2MaV2WLnKQ/exec";
 
 var MSG = [
@@ -255,6 +274,17 @@ function fmtTime(s){
   if(s>=3600){var h=Math.floor(s/3600);var m=Math.floor((s%3600)/60);var sec=s%60;return h+":"+(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec;}
   if(s>=60){var m2=Math.floor(s/60);var s2=s%60;return m2+":"+(s2<10?"0":"")+s2;}
   return s+"s";
+}
+
+function checkPassword(){
+  var pw=el("f-password").value.trim();
+  if(pw==="InboxTask"){
+    showScreen("screen-intro");
+  } else {
+    el("err-password").classList.add("show");
+    el("f-password").value="";
+    el("f-password").focus();
+  }
 }
 
 function startGame(){
@@ -415,6 +445,13 @@ function restart(){
   el("f-email").value="";
   showScreen("screen-intro");
 }
+
+document.addEventListener("DOMContentLoaded",function(){
+  var pwField=document.getElementById("f-password");
+  if(pwField){pwField.addEventListener("keydown",function(e){if(e.key==="Enter")checkPassword();});}
+  var nameField=document.getElementById("f-name");
+  if(nameField){nameField.addEventListener("keydown",function(e){if(e.key==="Enter")startGame();});}
+});
 </script>
 </body>
 </html>
